@@ -20,6 +20,8 @@
 #include <stdlib.h>
 #include <pcap/pcap.h>
 
+#define VERSION "0.2"
+
 int
 main (int argc, char *argv[])
 {
@@ -35,9 +37,9 @@ main (int argc, char *argv[])
 		if ( strcmp (pcap_dev_iter->name, "any") == 0 )
 			continue;
 
-		fprintf (stdout, "%s %s %s \"%s\"\n", pcap_dev_iter->name,
-							((pcap_dev_iter->flags & PCAP_IF_UP)? "up":"down"),
-							((pcap_dev_iter->flags & PCAP_IF_RUNNING)? "running":"stopped"),
+		fprintf (stdout, "name=\"%s\" up=\"%s\" running=\"%s\" description=\"%s\"\n", pcap_dev_iter->name,
+							((pcap_dev_iter->flags & PCAP_IF_UP)? "yes":"no"),
+							((pcap_dev_iter->flags & PCAP_IF_RUNNING)? "yes":"no"),
 							((pcap_dev_iter->description != NULL)? pcap_dev_iter->description:""));
 	}
 
